@@ -5,6 +5,10 @@
 #define ADAPTIVE_TERM 45
 #endif
 
+#ifndef COMMA_SHIFT_TERM
+#define COMMA_SHIFT_TERM 150
+#endif
+
 bool is_flow_tap_key(uint16_t keycode) {
     if (get_mods() & (MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) {
         return false;
@@ -67,6 +71,22 @@ bool hd_process_adaptive(uint16_t keycode, keyrecord_t *record) {
                                     : QK_LAYER_TAP_GET_TAP_KEYCODE(keycode);
     } else {
         kc = keycode;
+    }
+
+    if (kc >= KC_A && kc <= KC_Z
+        && hd_prior_keycode == KC_COMMA
+        && timer_elapsed(hd_prior_time) < COMMA_SHIFT_TERM
+        && !(get_mods() & MOD_MASK_SHIFT)
+#ifdef CAPS_WORD_ENABLE
+        && !is_caps_word_on()
+#endif
+    ) {
+        tap_code(KC_BSPC);
+        register_code(KC_LSFT);
+        tap_code(kc);
+        unregister_code(KC_LSFT);
+        hd_prior_keycode = KC_NO;
+        return false;
     }
 
     if (kc == KC_H && timer_elapsed(hd_prior_time) < ADAPTIVE_TERM) {
