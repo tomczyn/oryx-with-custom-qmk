@@ -6,7 +6,7 @@
 #define PERMISSIVE_HOLD
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
-#define SERIAL_NUMBER "PY5XZ/Nomldw"
+#define SERIAL_NUMBER "PY5XZ/rbG49b"
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 3
 
