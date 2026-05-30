@@ -95,6 +95,7 @@ bool hd_process_adaptive(uint16_t keycode, keyrecord_t *record) {
             case KC_U: repl = KC_A; break;
             case KC_E: repl = KC_O; break;
             case KC_O: repl = KC_E; break;
+            case KC_A: repl = KC_U; break;
         }
         if (repl != KC_NO) {
             hd_emit(repl);
