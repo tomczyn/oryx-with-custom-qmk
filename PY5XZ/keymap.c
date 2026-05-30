@@ -14,19 +14,22 @@ enum custom_keycodes {
   HSV_74_255_255,
   HSV_152_255_255,
   ST_MACRO_0,
+  ST_MACRO_1,
+  ST_MACRO_2,
+  ST_MACRO_3,
 };
 
 
 
-#define DUAL_FUNC_0 LT(4, KC_K)
-#define DUAL_FUNC_1 LT(7, KC_W)
-#define DUAL_FUNC_2 LT(2, KC_F18)
-#define DUAL_FUNC_3 LT(3, KC_Y)
-#define DUAL_FUNC_4 LT(9, KC_F3)
-#define DUAL_FUNC_5 LT(14, KC_F12)
-#define DUAL_FUNC_6 LT(8, KC_8)
-#define DUAL_FUNC_7 LT(12, KC_Z)
-#define DUAL_FUNC_8 LT(14, KC_F6)
+#define DUAL_FUNC_0 LT(13, KC_F10)
+#define DUAL_FUNC_1 LT(2, KC_F16)
+#define DUAL_FUNC_2 LT(2, KC_Q)
+#define DUAL_FUNC_3 LT(2, KC_A)
+#define DUAL_FUNC_4 LT(9, KC_F20)
+#define DUAL_FUNC_5 LT(5, KC_F1)
+#define DUAL_FUNC_6 LT(6, KC_8)
+#define DUAL_FUNC_7 LT(9, KC_F19)
+#define DUAL_FUNC_8 LT(7, KC_F15)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -34,14 +37,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          KC_J,           KC_F,           KC_M,           KC_P,           KC_V,                                           KC_SLASH,       KC_DOT,         KC_Q,           KC_X,           CW_TOGG,        KC_NO,          
     KC_NO,          MT(MOD_LALT, KC_K),MT(MOD_LSFT, KC_S),MT(MOD_LGUI, KC_N),MT(MOD_LCTL, KC_T),KC_B,                                           KC_COMMA,       MT(MOD_RCTL, KC_A),MT(MOD_RGUI, KC_E),MT(MOD_RSFT, KC_I),MT(MOD_RALT, KC_H),KC_NO,          
     KC_NO,          KC_W,           KC_C,           KC_L,           KC_D,           KC_G,                                           KC_ESCAPE,      KC_U,           KC_O,           KC_Y,           KC_Z,           KC_NO,          
-                                                    LT(1, KC_R),    LT(3, KC_ENTER),                                LT(4, KC_BSPC), LT(2, KC_SPACE)
+                                                    LT(4, KC_R),    LT(3, KC_ENTER),                                LT(1, KC_BSPC), LT(2, KC_SPACE)
   ),
   [1] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, TG(6),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, TG(5),          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, DUAL_FUNC_0,    DUAL_FUNC_1,    MT(MOD_LCTL, KC_T),KC_TRANSPARENT,                                 KC_TRANSPARENT, DUAL_FUNC_2,    DUAL_FUNC_3,    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, PL_08,          PL_06,          KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,                                KC_TRANSPARENT, KC_TRANSPARENT, PL_04,          PL_02,          PL_01,          KC_TRANSPARENT, 
-                                                    KC_TRANSPARENT, KC_TRANSPARENT,                                 LALT(KC_BSPC),  LGUI(KC_BSPC)
+                                                    KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, LGUI(KC_BSPC)
   ),
   [2] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -62,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_F9,          KC_F10,         KC_F11,         KC_F12,         KC_LEFT_ALT,                                    KC_PC_CUT,      KC_PAGE_UP,     KC_UP,          KC_PGDN,        KC_PSCR,        KC_TRANSPARENT, 
     KC_TRANSPARENT, MT(MOD_LALT, KC_F5),MT(MOD_LSFT, KC_F6),MT(MOD_LGUI, KC_F7),MT(MOD_LCTL, KC_F8),KC_LEFT_SHIFT,                                  KC_PC_COPY,     MT(MOD_RCTL, KC_LEFT),MT(MOD_RGUI, KC_DOWN),MT(MOD_RSFT, KC_RIGHT),KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_LEFT_CTRL,                                   KC_PC_PASTE,    KC_HOME,        KC_END,         KC_INSERT,      KC_DELETE,      KC_TRANSPARENT, 
-                                                    KC_LEFT_GUI,    KC_TAB,                                         KC_TRANSPARENT, KC_TRANSPARENT
+                                                    KC_TRANSPARENT, KC_TAB,                                         KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [5] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_ESCAPE,      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -90,18 +93,22 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT(
 
 const uint16_t PROGMEM combo0[] = { KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_DOT, KC_1, COMBO_END};
-const uint16_t PROGMEM combo2[] = { KC_1, KC_2, COMBO_END};
+const uint16_t PROGMEM combo2[] = { KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM combo3[] = { KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM combo4[] = { MT(MOD_LSFT, KC_S), KC_G, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, ST_MACRO_0),
     COMBO(combo1, KC_BSPC),
-    COMBO(combo2, LCTL(KC_SPACE)),
+    COMBO(combo2, ST_MACRO_1),
+    COMBO(combo3, ST_MACRO_2),
+    COMBO(combo4, ST_MACRO_3),
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_W:
-            return TAPPING_TERM -80;
+            return TAPPING_TERM -20;
         default:
             return TAPPING_TERM;
     }
@@ -189,6 +196,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case ST_MACRO_0:
     if (record->event.pressed) {
       SEND_STRING(SS_TAP(X_Q)SS_DELAY(20)  SS_TAP(X_U));
+    }
+    break;
+    case ST_MACRO_1:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_C)SS_DELAY(50)  SS_TAP(X_Z));
+    }
+    break;
+    case ST_MACRO_2:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_D)SS_DELAY(50)  SS_TAP(X_Z));
+    }
+    break;
+    case ST_MACRO_3:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_S)SS_DELAY(50)  SS_TAP(X_Z));
     }
     break;
 
