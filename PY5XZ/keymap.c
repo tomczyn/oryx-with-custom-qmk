@@ -21,15 +21,15 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(13, KC_F10)
-#define DUAL_FUNC_1 LT(2, KC_F16)
-#define DUAL_FUNC_2 LT(2, KC_Q)
-#define DUAL_FUNC_3 LT(2, KC_A)
-#define DUAL_FUNC_4 LT(9, KC_F20)
-#define DUAL_FUNC_5 LT(5, KC_F1)
-#define DUAL_FUNC_6 LT(6, KC_8)
-#define DUAL_FUNC_7 LT(9, KC_F19)
-#define DUAL_FUNC_8 LT(7, KC_F15)
+#define DUAL_FUNC_0 LT(4, KC_E)
+#define DUAL_FUNC_1 LT(1, KC_D)
+#define DUAL_FUNC_2 LT(6, KC_F17)
+#define DUAL_FUNC_3 LT(5, KC_F24)
+#define DUAL_FUNC_4 LT(11, KC_U)
+#define DUAL_FUNC_5 LT(2, KC_P)
+#define DUAL_FUNC_6 LT(3, KC_F24)
+#define DUAL_FUNC_7 LT(13, KC_Y)
+#define DUAL_FUNC_8 LT(15, KC_F17)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -55,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, NAVIGATOR_DEC_CPI,NAVIGATOR_INC_CPI,QK_LLCK,        KC_MS_BTN3,     KC_MEDIA_PLAY_PAUSE,                                KC_PLUS,        KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    DRAG_SCROLL,    KC_MS_BTN1,     KC_MS_BTN2,                                     KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_SLASH,       KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_LEFT_ALT,    KC_LEFT_CTRL,   TOGGLE_SCROLL,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,                                KC_DOT,         KC_1,           KC_2,           KC_3,           KC_EQUAL,       KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_NO,          KC_NO,          QK_LLCK,        KC_MS_BTN3,     KC_MEDIA_PLAY_PAUSE,                                KC_PLUS,        KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    KC_NO,          KC_MS_BTN1,     KC_MS_BTN2,                                     KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_SLASH,       KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_LEFT_ALT,    KC_LEFT_CTRL,   KC_NO,          KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,                                KC_DOT,         KC_1,           KC_2,           KC_3,           KC_EQUAL,       KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_0,           KC_COMMA
   ),
   [4] = LAYOUT_voyager(
