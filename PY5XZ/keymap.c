@@ -27,21 +27,21 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(7, KC_C)
-#define DUAL_FUNC_1 LT(13, KC_F9)
-#define DUAL_FUNC_2 LT(1, KC_F16)
-#define DUAL_FUNC_3 LT(11, KC_F3)
-#define DUAL_FUNC_4 LT(5, KC_W)
-#define DUAL_FUNC_5 LT(11, KC_X)
-#define DUAL_FUNC_6 LT(15, KC_W)
-#define DUAL_FUNC_7 LT(3, KC_T)
-#define DUAL_FUNC_8 LT(12, KC_F24)
+#define DUAL_FUNC_0 LT(2, KC_F20)
+#define DUAL_FUNC_1 LT(5, KC_F22)
+#define DUAL_FUNC_2 LT(5, KC_M)
+#define DUAL_FUNC_3 LT(15, KC_W)
+#define DUAL_FUNC_4 LT(14, KC_F)
+#define DUAL_FUNC_5 LT(2, KC_F)
+#define DUAL_FUNC_6 LT(10, KC_3)
+#define DUAL_FUNC_7 LT(5, KC_V)
+#define DUAL_FUNC_8 LT(15, KC_S)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,                                CW_TOGG,        KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_HOME,        KC_J,           KC_F,           KC_M,           KC_P,           KC_V,                                           KC_SLASH,       KC_DOT,         KC_Q,           KC_X,           KC_COLN,        KC_END,         
-    KC_PAGE_UP,     MT(MOD_LALT, KC_K),MT(MOD_LGUI, KC_S),MT(MOD_LCTL, KC_N),MT(MOD_LSFT, KC_T),KC_B,                                           KC_COMMA,       MT(MOD_RSFT, KC_A),MT(MOD_RCTL, KC_E),MT(MOD_RGUI, KC_I),MT(MOD_RALT, KC_H),KC_PGDN,        
+    KC_PAGE_UP,     MT(MOD_LALT, KC_K),MT(MOD_LSFT, KC_S),MT(MOD_LGUI, KC_N),MT(MOD_LCTL, KC_T),KC_B,                                           KC_COMMA,       MT(MOD_RCTL, KC_A),MT(MOD_RGUI, KC_E),MT(MOD_RSFT, KC_I),MT(MOD_RALT, KC_H),KC_PGDN,        
     LCTL(KC_C),     KC_W,           KC_C,           KC_L,           KC_D,           KC_G,                                           KC_ESCAPE,      KC_U,           KC_O,           KC_Y,           KC_Z,           LCTL(KC_V),     
                                                     LT(1, KC_R),    LT(3, KC_ENTER),                                LT(5, KC_BSPC), LT(2, KC_SPACE)
   ),
@@ -112,12 +112,12 @@ const uint16_t PROGMEM combo4[] = { KC_M, KC_V, COMBO_END};
 const uint16_t PROGMEM combo5[] = { KC_SLASH, KC_DOT, COMBO_END};
 const uint16_t PROGMEM combo6[] = { KC_M, KC_P, COMBO_END};
 const uint16_t PROGMEM combo7[] = { KC_W, KC_L, COMBO_END};
-const uint16_t PROGMEM combo8[] = { MT(MOD_LCTL, KC_N), MT(MOD_LSFT, KC_T), COMBO_END};
-const uint16_t PROGMEM combo9[] = { MT(MOD_LGUI, KC_S), MT(MOD_LCTL, KC_N), COMBO_END};
-const uint16_t PROGMEM combo10[] = { MT(MOD_LGUI, KC_S), MT(MOD_LSFT, KC_T), COMBO_END};
-const uint16_t PROGMEM combo11[] = { KC_F, KC_P, COMBO_END};
-const uint16_t PROGMEM combo12[] = { KC_D, KC_G, COMBO_END};
-const uint16_t PROGMEM combo13[] = { KC_P, KC_M, COMBO_END};
+const uint16_t PROGMEM combo8[] = { KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM combo9[] = { KC_D, KC_G, COMBO_END};
+const uint16_t PROGMEM combo10[] = { KC_P, KC_M, COMBO_END};
+const uint16_t PROGMEM combo11[] = { MT(MOD_LGUI, KC_N), MT(MOD_LCTL, KC_T), COMBO_END};
+const uint16_t PROGMEM combo12[] = { MT(MOD_LSFT, KC_S), MT(MOD_LGUI, KC_N), COMBO_END};
+const uint16_t PROGMEM combo13[] = { MT(MOD_LSFT, KC_S), MT(MOD_LCTL, KC_T), COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, ST_MACRO_0),
@@ -265,32 +265,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
     case ST_MACRO_5:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_T)SS_DELAY(100)  SS_TAP(X_H));
+      SEND_STRING(SS_TAP(X_W)SS_DELAY(100)  SS_TAP(X_H));
     }
     break;
     case ST_MACRO_6:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_S)SS_DELAY(100)  SS_TAP(X_H));
+      SEND_STRING(SS_TAP(X_G)SS_DELAY(100)  SS_TAP(X_H));
     }
     break;
     case ST_MACRO_7:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_C)SS_DELAY(100)  SS_TAP(X_H));
+      SEND_STRING(SS_TAP(X_P)SS_DELAY(100)  SS_TAP(X_H));
     }
     break;
     case ST_MACRO_8:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_W)SS_DELAY(100)  SS_TAP(X_H));
+      SEND_STRING(SS_TAP(X_T)SS_DELAY(100)  SS_TAP(X_H));
     }
     break;
     case ST_MACRO_9:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_G)SS_DELAY(100)  SS_TAP(X_H));
+      SEND_STRING(SS_TAP(X_S)SS_DELAY(100)  SS_TAP(X_H));
     }
     break;
     case ST_MACRO_10:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_P)SS_DELAY(100)  SS_TAP(X_H));
+      SEND_STRING(SS_TAP(X_C)SS_DELAY(100)  SS_TAP(X_H));
     }
     break;
 
