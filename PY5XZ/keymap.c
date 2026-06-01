@@ -21,15 +21,15 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(10, KC_F22)
-#define DUAL_FUNC_1 LT(2, KC_F7)
-#define DUAL_FUNC_2 LT(10, KC_F20)
-#define DUAL_FUNC_3 LT(15, KC_U)
-#define DUAL_FUNC_4 LT(1, KC_F16)
-#define DUAL_FUNC_5 LT(4, KC_1)
-#define DUAL_FUNC_6 LT(13, KC_G)
-#define DUAL_FUNC_7 LT(13, KC_T)
-#define DUAL_FUNC_8 LT(14, KC_L)
+#define DUAL_FUNC_0 LT(14, KC_F24)
+#define DUAL_FUNC_1 LT(9, KC_L)
+#define DUAL_FUNC_2 LT(3, KC_9)
+#define DUAL_FUNC_3 LT(8, KC_6)
+#define DUAL_FUNC_4 LT(10, KC_F16)
+#define DUAL_FUNC_5 LT(10, KC_R)
+#define DUAL_FUNC_6 LT(6, KC_Y)
+#define DUAL_FUNC_7 LT(3, KC_R)
+#define DUAL_FUNC_8 LT(12, KC_F6)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -55,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_NO,          KC_NO,          QK_LLCK,        KC_MS_BTN3,     KC_MEDIA_PLAY_PAUSE,                                KC_PLUS,        KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    KC_NO,          KC_MS_BTN1,     KC_MS_BTN2,                                     KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_SLASH,       KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_LEFT_ALT,    KC_LEFT_CTRL,   KC_NO,          KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,                                KC_DOT,         KC_1,           KC_2,           KC_3,           KC_EQUAL,       KC_TRANSPARENT, 
+    KC_TRANSPARENT, NAVIGATOR_DEC_CPI,NAVIGATOR_INC_CPI,QK_LLCK,        KC_MS_BTN3,     KC_MEDIA_PLAY_PAUSE,                                KC_PLUS,        KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_GUI,    DRAG_SCROLL,    KC_MS_BTN1,     KC_MS_BTN2,                                     KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_SLASH,       KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_LEFT_ALT,    KC_LEFT_CTRL,   TOGGLE_SCROLL,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,                                KC_DOT,         KC_1,           KC_2,           KC_3,           KC_EQUAL,       KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_0,           KC_COMMA
   ),
   [4] = LAYOUT_voyager(
@@ -121,7 +121,7 @@ combo_t key_combos[COMBO_COUNT] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_W:
-            return TAPPING_TERM -20;
+            return TAPPING_TERM -10;
         default:
             return TAPPING_TERM;
     }
