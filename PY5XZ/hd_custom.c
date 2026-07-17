@@ -9,6 +9,15 @@
 #define COMMA_SHIFT_TERM 150
 #endif
 
+#ifdef OS_DETECTION_ENABLE
+bool process_detected_host_os_user(os_variant_t os) {
+    bool mac = (os == OS_MACOS || os == OS_IOS);
+    keymap_config.swap_lctl_lgui = mac;
+    keymap_config.swap_rctl_rgui = mac;
+    return true;
+}
+#endif
+
 bool is_flow_tap_key(uint16_t keycode) {
     if (get_mods() & (MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) {
         return false;
