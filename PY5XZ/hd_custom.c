@@ -66,6 +66,18 @@ static void hd_emit(uint16_t kc) {
 }
 
 bool hd_process_adaptive(uint16_t keycode, keyrecord_t *record) {
+    if (keycode == LCTL(KC_SPC)) {
+        if (record->event.pressed) {
+            hd_prior_keycode = KC_NO;
+            register_mods(MOD_BIT(KC_LCTL));
+            register_code(KC_SPC);
+        } else {
+            unregister_code(KC_SPC);
+            unregister_mods(MOD_BIT(KC_LCTL));
+        }
+        return false;
+    }
+
     if (!record->event.pressed) {
         return true;
     }
