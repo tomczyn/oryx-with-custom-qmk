@@ -28,15 +28,15 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(5, KC_F8)
-#define DUAL_FUNC_1 LT(11, KC_A)
-#define DUAL_FUNC_2 LT(6, KC_F6)
-#define DUAL_FUNC_3 LT(14, KC_W)
-#define DUAL_FUNC_4 LT(5, KC_6)
-#define DUAL_FUNC_5 LT(13, KC_N)
-#define DUAL_FUNC_6 LT(4, KC_7)
-#define DUAL_FUNC_7 LT(13, KC_6)
-#define DUAL_FUNC_8 LT(11, KC_F15)
+#define DUAL_FUNC_0 LT(1, KC_B)
+#define DUAL_FUNC_1 LT(3, KC_Y)
+#define DUAL_FUNC_2 LT(10, KC_B)
+#define DUAL_FUNC_3 LT(4, KC_M)
+#define DUAL_FUNC_4 LT(6, KC_I)
+#define DUAL_FUNC_5 LT(9, KC_I)
+#define DUAL_FUNC_6 LT(15, KC_F22)
+#define DUAL_FUNC_7 LT(3, KC_F20)
+#define DUAL_FUNC_8 LT(2, KC_F8)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -120,12 +120,12 @@ const uint16_t PROGMEM combo11[] = { MT(MOD_LSFT, KC_N), MT(MOD_LCTL, KC_T), COM
 const uint16_t PROGMEM combo12[] = { MT(MOD_LGUI, KC_S), MT(MOD_LCTL, KC_T), COMBO_END};
 const uint16_t PROGMEM combo13[] = { MT(MOD_LGUI, KC_S), MT(MOD_LSFT, KC_N), COMBO_END};
 const uint16_t PROGMEM combo14[] = { MT(MOD_LSFT, KC_N), KC_B, COMBO_END};
-const uint16_t PROGMEM combo15[] = { MT(MOD_LALT, KC_K), MT(MOD_LGUI, KC_S), COMBO_END};
-const uint16_t PROGMEM combo16[] = { KC_W, KC_C, COMBO_END};
-const uint16_t PROGMEM combo17[] = { KC_C, KC_L, COMBO_END};
-const uint16_t PROGMEM combo18[] = { KC_COMMA, MT(MOD_RSFT, KC_E), COMBO_END};
-const uint16_t PROGMEM combo19[] = { MT(MOD_RCTL, KC_A), MT(MOD_RGUI, KC_I), COMBO_END};
-const uint16_t PROGMEM combo20[] = { KC_DOT, KC_X, COMBO_END};
+const uint16_t PROGMEM combo15[] = { KC_W, KC_C, COMBO_END};
+const uint16_t PROGMEM combo16[] = { KC_C, KC_L, COMBO_END};
+const uint16_t PROGMEM combo17[] = { KC_COMMA, MT(MOD_RSFT, KC_E), COMBO_END};
+const uint16_t PROGMEM combo18[] = { MT(MOD_RCTL, KC_A), MT(MOD_RGUI, KC_I), COMBO_END};
+const uint16_t PROGMEM combo19[] = { KC_DOT, KC_X, COMBO_END};
+const uint16_t PROGMEM combo20[] = { MT(MOD_LALT, KC_K), MT(MOD_LSFT, KC_N), COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, ST_MACRO_0),
@@ -143,12 +143,12 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo12, ST_MACRO_9),
     COMBO(combo13, ST_MACRO_10),
     COMBO(combo14, PL_05),
-    COMBO(combo15, PL_03),
-    COMBO(combo16, PL_08),
-    COMBO(combo17, PL_06),
-    COMBO(combo18, PL_09),
-    COMBO(combo19, PL_07),
-    COMBO(combo20, PL_04),
+    COMBO(combo15, PL_08),
+    COMBO(combo16, PL_06),
+    COMBO(combo17, PL_09),
+    COMBO(combo18, PL_07),
+    COMBO(combo19, PL_04),
+    COMBO(combo20, PL_03),
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
