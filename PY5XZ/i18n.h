@@ -1,5 +1,5 @@
-#define PL_03 ALGR(KC_S)
 #define PL_05 ALGR(KC_N)
+#define PL_03 ALGR(KC_S)
 #define PL_08 ALGR(KC_C)
 #define PL_06 ALGR(KC_L)
 #define PL_09 ALGR(KC_A)
