@@ -10,13 +10,43 @@
 #endif
 
 #ifdef OS_DETECTION_ENABLE
+static bool hd_os_reported = false;
+static os_variant_t hd_os_value = OS_UNSURE;
+
 bool process_detected_host_os_user(os_variant_t os) {
-    bool swap = (os != OS_LINUX && os != OS_WINDOWS);
-    keymap_config.swap_lctl_lgui = swap;
-    keymap_config.swap_rctl_rgui = swap;
+    hd_os_reported = true;
+    hd_os_value = os;
+    keymap_config.swap_lctl_lgui = true;
+    keymap_config.swap_rctl_rgui = true;
+    return true;
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (led_min == 0) {
+        if (!hd_os_reported) {
+            rgb_matrix_set_color(0, 255, 255, 255);
+        } else if (hd_os_value == OS_MACOS || hd_os_value == OS_IOS) {
+            rgb_matrix_set_color(0, 0, 0, 255);
+        } else if (hd_os_value == OS_LINUX) {
+            rgb_matrix_set_color(0, 255, 0, 0);
+        } else if (hd_os_value == OS_WINDOWS) {
+            rgb_matrix_set_color(0, 255, 255, 0);
+        } else {
+            rgb_matrix_set_color(0, 0, 255, 0);
+        }
+    }
     return true;
 }
 #endif
+
+void housekeeping_task_user(void) {
+    static bool hd_swap_forced = false;
+    if (!hd_swap_forced) {
+        hd_swap_forced = true;
+        keymap_config.swap_lctl_lgui = true;
+        keymap_config.swap_rctl_rgui = true;
+    }
+}
 
 bool is_flow_tap_key(uint16_t keycode) {
     if (get_mods() & (MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) {
