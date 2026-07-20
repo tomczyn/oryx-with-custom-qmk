@@ -11,9 +11,9 @@
 
 #ifdef OS_DETECTION_ENABLE
 bool process_detected_host_os_user(os_variant_t os) {
-    bool mac = (os == OS_MACOS || os == OS_IOS);
-    keymap_config.swap_lctl_lgui = mac;
-    keymap_config.swap_rctl_rgui = mac;
+    bool swap = (os != OS_LINUX && os != OS_WINDOWS);
+    keymap_config.swap_lctl_lgui = swap;
+    keymap_config.swap_rctl_rgui = swap;
     return true;
 }
 #endif
