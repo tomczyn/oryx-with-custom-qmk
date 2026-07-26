@@ -171,6 +171,7 @@ RGB hsv_to_rgb_with_value(HSV hsv) {
 
 void keyboard_post_init_user(void) {
   rgb_matrix_enable();
+  hd_keyboard_post_init();
 }
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {

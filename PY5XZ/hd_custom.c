@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "hd_custom.h"
+#include "hd_host_os.h"
 
 #ifndef ADAPTIVE_TERM
 #define ADAPTIVE_TERM 45
@@ -10,43 +11,36 @@
 #endif
 
 #ifdef OS_DETECTION_ENABLE
-static bool hd_os_reported = false;
-static os_variant_t hd_os_value = OS_UNSURE;
+static bool hd_swap_ctrl_gui = false;
+
+static void hd_apply_ctrl_gui_swap(void) {
+    if (!hd_ctrl_gui_swap_needs_update(
+            keymap_config.swap_lctl_lgui,
+            keymap_config.swap_rctl_rgui,
+            hd_swap_ctrl_gui)) {
+        return;
+    }
+    keymap_config.swap_lctl_lgui = hd_swap_ctrl_gui;
+    keymap_config.swap_rctl_rgui = hd_swap_ctrl_gui;
+    clear_keyboard();
+}
+
+void hd_keyboard_post_init(void) {
+    hd_swap_ctrl_gui = false;
+    keymap_config.swap_lctl_lgui = false;
+    keymap_config.swap_rctl_rgui = false;
+}
 
 bool process_detected_host_os_user(os_variant_t os) {
-    hd_os_reported = true;
-    hd_os_value = os;
-    keymap_config.swap_lctl_lgui = true;
-    keymap_config.swap_rctl_rgui = true;
+    hd_swap_ctrl_gui = hd_should_swap_ctrl_gui(os);
+    hd_apply_ctrl_gui_swap();
     return true;
 }
-
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (led_min == 0) {
-        if (!hd_os_reported) {
-            rgb_matrix_set_color(0, 255, 255, 255);
-        } else if (hd_os_value == OS_MACOS || hd_os_value == OS_IOS) {
-            rgb_matrix_set_color(0, 0, 0, 255);
-        } else if (hd_os_value == OS_LINUX) {
-            rgb_matrix_set_color(0, 255, 0, 0);
-        } else if (hd_os_value == OS_WINDOWS) {
-            rgb_matrix_set_color(0, 255, 255, 0);
-        } else {
-            rgb_matrix_set_color(0, 0, 255, 0);
-        }
-    }
-    return true;
-}
-#endif
 
 void housekeeping_task_user(void) {
-    static bool hd_swap_forced = false;
-    if (!hd_swap_forced) {
-        hd_swap_forced = true;
-        keymap_config.swap_lctl_lgui = true;
-        keymap_config.swap_rctl_rgui = true;
-    }
+    hd_apply_ctrl_gui_swap();
 }
+#endif
 
 bool is_flow_tap_key(uint16_t keycode) {
     if (get_mods() & (MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) {
