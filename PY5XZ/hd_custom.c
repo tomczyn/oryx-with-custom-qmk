@@ -12,6 +12,7 @@
 
 #ifdef OS_DETECTION_ENABLE
 #include "usb_device_state.h"
+#include "hd_setups_data.h"
 
 // How long to wait after the host configures the device before assuming the primary host. QMK's
 // macOS pattern needs 5+ setup packets ending in 0xFF; if the HID descriptor read that supplies
@@ -73,13 +74,13 @@ void notify_usb_device_state_change_user(struct usb_device_state usb_device_stat
     hd_usb_configured = usb_device_state.configure_state == USB_DEVICE_STATE_CONFIGURED;
 }
 
+// QMK's verdict is deliberately NOT used to set the policy. On this host it is positively wrong
+// whenever a stray 4-byte control read lands (OS_WINDOWS, or OS_LINUX via the PS5 branch), and
+// because its counters are cumulative that verdict is permanent. hd_classify_host() reads the same
+// counters correctly, so housekeeping owns the decision. Keeping this override documents that the
+// callback is intentionally inert rather than merely unimplemented.
 bool process_detected_host_os_user(os_variant_t os) {
-    if (os != OS_UNSURE) {
-        hd_policy.detected_known = true;
-        hd_policy.detected_os    = os;
-    }
-    hd_policy.apple_latched = hd_apple_host_latch(hd_policy.apple_latched, os);
-    hd_refresh_policy();
+    (void)os;
     return true;
 }
 
@@ -98,16 +99,15 @@ static bool hd_process_host_override(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) {
         return false;
     }
-    hd_policy.manual_set = true;
     switch (keycode) {
         case QK_MAGIC_SWAP_CTL_GUI:
-            hd_policy.manual_swap = true;
+            hd_policy_on_manual(&hd_policy, true);
             break;
         case QK_MAGIC_UNSWAP_CTL_GUI:
-            hd_policy.manual_swap = false;
+            hd_policy_on_manual(&hd_policy, false);
             break;
         default:
-            hd_policy.manual_swap = !hd_swap_ctrl_gui;
+            hd_policy_on_manual(&hd_policy, !hd_swap_ctrl_gui);
             break;
     }
     hd_refresh_policy();
@@ -118,13 +118,27 @@ static bool hd_process_host_override(uint16_t keycode, keyrecord_t *record) {
 }
 
 void housekeeping_task_user(void) {
+    // Our own classification of QMK's counters is the primary signal, because QMK's verdict is
+    // positively wrong on this host whenever a stray 4-byte control read lands. Feed it in as a
+    // synthetic detection result; it outranks nothing, it just supplies a trustworthy one.
+    switch (hd_current_host_class()) {
+        case HD_HOST_APPLE:
+            hd_policy_on_detection(&hd_policy, OS_MACOS);
+            break;
+        case HD_HOST_PC:
+            hd_policy_on_detection(&hd_policy, OS_LINUX);
+            break;
+        case HD_HOST_UNKNOWN:
+            break;
+    }
+
     if (hd_usb_configured) {
         if (!hd_fallback_armed) {
             hd_fallback_armed = true;
             hd_configured_at  = timer_read32();
         } else if (!hd_policy.fallback_due && !hd_policy.detected_known &&
                    timer_elapsed32(hd_configured_at) >= HD_HOST_FALLBACK_MS) {
-            hd_policy.fallback_due = true;
+            hd_policy_on_fallback(&hd_policy);
         }
     }
     hd_refresh_policy();

@@ -32,6 +32,28 @@ int main(void) {
     assert(hd_apple_host_latch(true, OS_MACOS));
     assert(hd_apple_host_latch(true, OS_IOS));
 
+    // hd_classify_host: counts are (count, cnt_02, cnt_04, cnt_ff).
+    // Too little data to decide.
+    assert(hd_classify_host(0, 0, 0, 0) == HD_HOST_UNKNOWN);
+    assert(hd_classify_host(2, 2, 0, 0) == HD_HOST_UNKNOWN);
+
+    // Every macOS/iOS sequence in QMK's collected data has cnt_02 >= 2. These are the counter
+    // totals for macOS 15.x {02,4E,02,1C,02,1A,FF,FF} and iOS {02,24,02,28}.
+    assert(hd_classify_host(8, 3, 0, 2) == HD_HOST_APPLE);
+    assert(hd_classify_host(4, 2, 0, 0) == HD_HOST_APPLE);
+
+    // The whole point: a stray 4-byte read cannot move an Apple host to PC, at any counter total.
+    // QMK calls the first of these OS_WINDOWS and the second OS_LINUX via the PS5 branch.
+    assert(hd_classify_host(9, 3, 1, 2) == HD_HOST_APPLE);
+    assert(hd_classify_host(7, 3, 1, 0) == HD_HOST_APPLE);
+
+    // Real PC hosts never send 2-byte string reads, so they still classify as PC.
+    assert(hd_classify_host(3, 0, 0, 3) == HD_HOST_PC);  // Linux {FF,FF,FF}
+    assert(hd_classify_host(6, 0, 0, 6) == HD_HOST_PC);  // Linux, longer
+    assert(hd_classify_host(6, 0, 2, 2) == HD_HOST_PC);  // Windows {FF,FF,04,24,04,24}
+    assert(hd_classify_host(5, 0, 1, 3) == HD_HOST_PC);  // V-USB Windows {FF,FF,04,0E,FF}
+    assert(hd_classify_host(4, 0, 0, 4) == HD_HOST_PC);  // Quest 2 {FF,FF,FF,FE} -> counted as FF*3
+
     // Nothing decided yet -> stock, and no indicator claim.
     hd_policy_inputs_t fresh = {0};
     assert(!hd_resolve_swap(fresh));
