@@ -11,7 +11,8 @@
 #endif
 
 #ifdef OS_DETECTION_ENABLE
-static bool hd_swap_ctrl_gui = false;
+static bool hd_swap_ctrl_gui   = false;
+static bool hd_apple_confirmed = false;
 
 static void hd_apply_ctrl_gui_swap(void) {
     if (!hd_ctrl_gui_swap_needs_update(
@@ -26,13 +27,15 @@ static void hd_apply_ctrl_gui_swap(void) {
 }
 
 void hd_keyboard_post_init(void) {
-    hd_swap_ctrl_gui = false;
+    hd_swap_ctrl_gui   = false;
+    hd_apple_confirmed = false;
     keymap_config.swap_lctl_lgui = false;
     keymap_config.swap_rctl_rgui = false;
 }
 
 bool process_detected_host_os_user(os_variant_t os) {
-    hd_swap_ctrl_gui = hd_should_swap_ctrl_gui(os);
+    hd_apple_confirmed = hd_apple_host_latch(hd_apple_confirmed, os);
+    hd_swap_ctrl_gui   = hd_apple_confirmed;
     hd_apply_ctrl_gui_swap();
     return true;
 }
