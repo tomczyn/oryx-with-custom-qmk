@@ -235,14 +235,18 @@ bool hd_process_adaptive(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
 
-    if (keycode == LCTL(KC_SPC)) {
+    // Ctrl+Space and GUI+Space each keep the modifier the keymap names, on every host. The swap
+    // policy rewrites QK_MODS in action_for_keycode(), which would collapse both of these to
+    // Ctrl+Space on Apple; register_mods() is not on that path.
+    if (keycode == LCTL(KC_SPC) || keycode == LGUI(KC_SPC)) {
+        const uint8_t mod = (keycode == LCTL(KC_SPC)) ? MOD_BIT(KC_LCTL) : MOD_BIT(KC_LGUI);
         if (record->event.pressed) {
             hd_prior_keycode = KC_NO;
-            register_mods(MOD_BIT(KC_LCTL));
+            register_mods(mod);
             register_code(KC_SPC);
         } else {
             unregister_code(KC_SPC);
-            unregister_mods(MOD_BIT(KC_LCTL));
+            unregister_mods(mod);
         }
         return false;
     }
