@@ -6,7 +6,7 @@ on:
       layout_id:
         description: "Layout id available in URL https://configure.zsa.io/voyager/layouts/[ID_IS_HERE]/latest"
         required: true
-        default: "g7jjw"
+        default: "PY5XZ"
       layout_geometry:
         description: "Keyboard type"
         type: choice
@@ -61,11 +61,13 @@ jobs:
           rm source.zip
 
       - name: Commit and Push changes
+        env:
+          CHANGE_DESCRIPTION: ${{ steps.download-layout-source.outputs.change_description }}
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
           git add .
-          git commit -m "✨(oryx): ${{ steps.download-layout-source.outputs.change_description }}" || echo "No layout change"
+          git commit -m "✨(oryx): $CHANGE_DESCRIPTION" || echo "No layout change"
           git push
 
       - name: Merge Oryx with custom QMK
