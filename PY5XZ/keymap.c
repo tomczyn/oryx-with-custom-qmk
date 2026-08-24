@@ -39,15 +39,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [1] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, NAVIGATOR_DEC_CPI,NAVIGATOR_INC_CPI,QK_LLCK,        KC_MS_BTN3,     KC_MEDIA_PLAY_PAUSE,                                KC_PLUS,        KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_LEFT_SHIFT,  KC_LEFT_CTRL,   DRAG_SCROLL,    KC_MS_BTN1,     KC_MS_BTN2,                                     KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_SLASH,       KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_LEFT_ALT,    KC_LEFT_GUI,    TOGGLE_SCROLL,  LGUI(KC_SPACE), LCTL(KC_SPACE),                                 KC_DOT,         KC_1,           KC_2,           KC_3,           KC_EQUAL,       KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_LEFT_GUI,    KC_LEFT_CTRL,   DRAG_SCROLL,    KC_MS_BTN1,     KC_MS_BTN2,                                     KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_SLASH,       KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_LEFT_ALT,    KC_LEFT_SHIFT,  TOGGLE_SCROLL,  LGUI(KC_SPACE), LCTL(KC_SPACE),                                 KC_DOT,         KC_1,           KC_2,           KC_3,           KC_EQUAL,       KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_0,           KC_COMMA
   ),
   [2] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_F9,          KC_F10,         KC_F11,         KC_F12,         KC_TRANSPARENT,                                 KC_HOME,        KC_PAGE_UP,     KC_UP,          KC_PGDN,        KC_PSCR,        KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_F5,          KC_F6,          KC_F7,          KC_F8,          KC_LEFT_CTRL,                                   KC_END,         KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_LEFT_GUI,                                    KC_ESCAPE,      KC_LBRC,        KC_RBRC,        KC_INSERT,      KC_DELETE,      KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_F1,          KC_F2,          KC_F3,          KC_F4,          LSFT(KC_LEFT_CTRL),                                KC_ESCAPE,      KC_LBRC,        KC_RBRC,        KC_INSERT,      KC_DELETE,      KC_TRANSPARENT, 
                                                     LALT(KC_LEFT_GUI),KC_TAB,                                         KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [3] = LAYOUT_voyager(
