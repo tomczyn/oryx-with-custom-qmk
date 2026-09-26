@@ -1,7 +1,7 @@
 {
     "modules": [
         "zsa/oryx",
-        "zsa/navigator_trackpad",
+        "zsa/navigator_trackball",
         "zsa/defaults"
     ]
 }
